@@ -12,6 +12,8 @@ const connPromise = () => new Promise((resolve) => {
 
 export default function usePoints() {
     const [points, setPoints] = useState<Point[]>([]);
+    const [quantity, setQuantity] = useState<number | null>(null);
+    const [duration, setDuration] = useState<number>(0.5);
     useEffect(() => {
         toast.promise(connPromise, {
             pending: 'Подключение к серверу',
@@ -19,7 +21,11 @@ export default function usePoints() {
             success: 'Подключено к серверу'
         }).then()
     }, []);
-    const generatePoints = (data: PointsFormData) => socket.emit('generate_points', data);
+    const generatePoints = (data: PointsFormData) => {
+        setQuantity(data.quantity)
+        setDuration(data.sleep)
+        socket.emit('generate_points', data)
+    }
     const stopGeneration = () => socket.emit('stop_generation');
     useEffect(() => {
         socket.on('new_point', point => {
@@ -28,5 +34,6 @@ export default function usePoints() {
         socket.on('new_graph', () => {setPoints([])})
     }, []);
     const dropPoints = () => setPoints([])
-    return {points, generatePoints, dropPoints, stopGeneration}
+    const progress = quantity && (points.length / quantity)
+    return {points, generatePoints, dropPoints, stopGeneration, progress, duration}
 }
