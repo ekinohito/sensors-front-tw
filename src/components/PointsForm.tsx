@@ -26,14 +26,14 @@ export const PointsForm: React.FC<PointsFormProps> = ({onSubmit, onCancel}) => {
                 <div className="flex flex-row justify-around flex-wrap">
                     <button
                         className="bg-blue-500 hover:bg-blue-700 text-white
-                         font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline m-2">
+                         font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline m-2 flex-grow">
                         НАЧАТЬ!
                     </button>
                     <button
                         type="button"
                         onClick={onCancel}
                         className="bg-red-500 hover:bg-red-700 text-white
-                         font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline m-2">
+                         font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline m-2 flex-grow">
                         ЗАКОНЧИТЬ!
                     </button>
                 </div>
