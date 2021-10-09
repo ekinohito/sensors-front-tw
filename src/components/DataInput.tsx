@@ -15,7 +15,7 @@ export const DataInput: React.FC<DataInputProps> =(
     const {field} = useController({
         name,
         control,
-        rules: {required: true},
+        rules: {required: false},
         defaultValue
     });
     return (
