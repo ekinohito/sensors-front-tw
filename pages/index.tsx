@@ -7,7 +7,7 @@ import React from "react";
 import {ToastContainer} from "react-toastify";
 
 const Home: NextPage = () => {
-    const {points, generatePoints, dropPoints} = usePoints()
+    const {points, generatePoints, stopGeneration} = usePoints()
     return (
         <>
             <header className="bg-blue-500">
@@ -15,13 +15,16 @@ const Home: NextPage = () => {
                     Sensors
                 </div>
             </header>
-            <div className="container px-4 mx-auto grid grid-cols-3 space-x-7 md:my-12 items-start">
-                <Paper className="col-span-3 md:col-span-2 text-center order-3 md:order-1">
-                    <h1 className="text-xl font-bold text-gray-700">График</h1>
-                    <PointsGraph points={points}/>
-                </Paper>
+            <div className="container px-4 mx-auto grid grid-cols-3 md:space-x-7 md:my-12 items-start">
+                <div className="col-span-3 md:col-span-2 text-center order-3 md:order-1">
+                    <Paper >
+                        <h1 className="text-xl font-bold text-gray-700">График</h1>
+                        <PointsGraph points={points}/>
+                    </Paper>
+                </div>
+
                 <div className="order-2 col-span-3 md:col-span-1 my-7 md:my-0">
-                    <PointsForm onSubmit={(values) => generatePoints(values)}/>
+                    <PointsForm onCancel={stopGeneration} onSubmit={(values) => generatePoints(values)}/>
                 </div>
             </div>
             <ToastContainer
