@@ -10,7 +10,7 @@ const Home: NextPage = () => {
                     Header
                 </div>
             </header>
-            <div className="container mx-auto grid grid-cols-3 space-x-7 my-6">
+            <div className="container mx-auto grid grid-cols-3 space-x-7 my-12">
                 <Paper className="col-span-2 text-center">
                     Graph
                     <PointsGraph points={[{x: 1, y: 2}, {x: 2, y: 3}, {x: 3, y: 1}]}/>
