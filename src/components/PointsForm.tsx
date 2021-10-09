@@ -33,7 +33,7 @@ export const PointsForm: React.FC<PointsFormProps> = ({onSubmit, onCancel}) => {
                         type="button"
                         onClick={onCancel}
                         className="bg-red-500 hover:bg-red-700 text-white
-                         font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline m-2 flex-grow">
+                         font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline m-2 flex-grow hidden">
                         ЗАКОНЧИТЬ!
                     </button>
                 </div>
