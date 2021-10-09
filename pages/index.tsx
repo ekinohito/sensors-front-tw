@@ -1,8 +1,10 @@
 import type {NextPage} from 'next'
 import {PointsGraph} from "../src/components/PointsGraph";
 import {Paper} from "../src/components/Paper";
+import usePoints from "../src/hooks/usePoints";
 
 const Home: NextPage = () => {
+    const {points, generatePoints, dropPoints} = usePoints()
     return (
         <>
             <header className="bg-blue-500">
@@ -13,7 +15,8 @@ const Home: NextPage = () => {
             <div className="container mx-auto grid grid-cols-3 space-x-7 my-12">
                 <Paper className="col-span-2 text-center">
                     Graph
-                    <PointsGraph points={[{x: 1, y: 2}, {x: 2, y: 3}, {x: 3, y: 1}]}/>
+                    <PointsGraph points={points}/>
+                    <button className="" onClick={() => {dropPoints(); generatePoints({})}}>Gen</button>
                 </Paper>
 
                 <div><Paper>
