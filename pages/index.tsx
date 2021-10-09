@@ -6,9 +6,10 @@ import {PointsForm} from "../src/components/PointsForm";
 import React from "react";
 import {ToastContainer} from "react-toastify";
 import Head from "next/head";
+import {ProgressBar} from "../src/components/ProgressBar";
 
 const Home: NextPage = () => {
-    const {points, generatePoints, stopGeneration} = usePoints()
+    const {points, generatePoints, stopGeneration, progress} = usePoints()
     return (
         <>
             <Head>
@@ -33,6 +34,7 @@ const Home: NextPage = () => {
 
                 <div className="order-2 col-span-3 md:col-span-1 my-7 md:my-0">
                     <PointsForm onCancel={stopGeneration} onSubmit={(values) => generatePoints(values)}/>
+                    {progress?<ProgressBar width={progress}/>:<></>}
                 </div>
             </div>
             <ToastContainer
