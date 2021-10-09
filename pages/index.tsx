@@ -11,8 +11,8 @@ const Home: NextPage = () => {
     return (
         <>
             <header className="bg-blue-500">
-                <div className="container px-4 mx-auto sticky py-3">
-                    Header
+                <div className="container px-4 mx-auto sticky py-3 text-white text-2xl font-bold">
+                    Sensors
                 </div>
             </header>
             <div className="container px-4 mx-auto grid grid-cols-3 space-x-7 md:my-12 items-start">
