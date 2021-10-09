@@ -9,7 +9,7 @@ import Head from "next/head";
 import {ProgressBar} from "../src/components/ProgressBar";
 
 const Home: NextPage = () => {
-    const {points, generatePoints, stopGeneration, progress, duration} = usePoints()
+    const {points, generatePoints, stopGeneration, progress, duration, canCancel} = usePoints()
     return (
         <>
             <Head>
@@ -33,7 +33,7 @@ const Home: NextPage = () => {
                 </div>
 
                 <div className="order-2 col-span-3 md:col-span-1 my-7 md:my-0">
-                    <PointsForm onCancel={stopGeneration} onSubmit={(values) => generatePoints(values)}/>
+                    <PointsForm canCancel={canCancel} onCancel={stopGeneration} onSubmit={(values) => generatePoints(values)}/>
                     {progress?<ProgressBar width={progress} duration={duration}/>:<></>}
                 </div>
             </div>

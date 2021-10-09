@@ -35,5 +35,6 @@ export default function usePoints() {
     }, []);
     const dropPoints = () => setPoints([])
     const progress = quantity && (points.length / quantity)
-    return {points, generatePoints, dropPoints, stopGeneration, progress, duration}
+    const canCancel = !!quantity && points.length < quantity
+    return {points, generatePoints, dropPoints, stopGeneration, progress, duration, canCancel}
 }
