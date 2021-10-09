@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import {useEffect, useRef, useState} from 'react';
 import {io} from 'socket.io-client';
 import {toast} from 'react-toastify'
 import {Point} from "../types/Point";
@@ -12,8 +12,8 @@ const connPromise = () => new Promise((resolve) => {
 
 export default function usePoints() {
     const [points, setPoints] = useState<Point[]>([]);
-    const [quantity, setQuantity] = useState<number | null>(null);
-    const [duration, setDuration] = useState<number>(0.5);
+    const quantity = useRef<number | null>(null);
+    const duration = useRef<number>(0.5);
     useEffect(() => {
         toast.promise(connPromise, {
             pending: 'Подключение к серверу',
@@ -22,8 +22,8 @@ export default function usePoints() {
         }).then()
     }, []);
     const generatePoints = (data: PointsFormData) => {
-        setQuantity(data.quantity)
-        setDuration(data.sleep)
+        quantity.current = data.quantity
+        duration.current = data.sleep;
         socket.emit('generate_points', data)
     }
     const stopGeneration = () => socket.emit('stop_generation');
@@ -34,6 +34,6 @@ export default function usePoints() {
         socket.on('new_graph', () => {setPoints([])})
     }, []);
     const dropPoints = () => setPoints([])
-    const progress = quantity && (points.length / quantity)
-    return {points, generatePoints, dropPoints, stopGeneration, progress, duration}
+    const progress = quantity.current && (points.length / quantity.current)
+    return {points, generatePoints, dropPoints, stopGeneration, progress, duration: duration.current}
 }
