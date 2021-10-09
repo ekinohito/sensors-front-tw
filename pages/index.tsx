@@ -12,14 +12,13 @@ const Home: NextPage = () => {
                     Header
                 </div>
             </header>
-            <div className="container mx-auto grid grid-cols-3 space-x-7 my-12">
-                <Paper className="col-span-2 text-center">
+            <div className="container mx-auto grid grid-cols-3 space-x-7 md:my-12">
+                <Paper className="col-span-3 md:col-span-2 text-center order-3 md:order-1">
                     Graph
                     <PointsGraph points={points}/>
                     <button className="" onClick={() => {dropPoints(); generatePoints({})}}>Gen</button>
                 </Paper>
-
-                <div><Paper>
+                <div className="order-2 col-span-3 md:col-span-1 my-7 md:my-0"><Paper>
                     Buttons
                 </Paper></div>
             </div>
