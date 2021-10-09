@@ -1,5 +1,9 @@
 import React from 'react';
 
 export const PointsForm: React.FC = () => {
-    return 
+    return (
+        <div className=''>
+
+        </div>
+    )
 }
