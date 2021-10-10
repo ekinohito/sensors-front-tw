@@ -6,10 +6,11 @@ import {Paper} from "./Paper";
 
 interface PointsFormProps {
     onSubmit: (data: PointsFormData) => void,
-    onCancel: () => void
+    onCancel: () => void,
+    canCancel?: boolean
 }
 
-export const PointsForm: React.FC<PointsFormProps> = ({onSubmit, onCancel}) => {
+export const PointsForm: React.FC<PointsFormProps> = ({onSubmit, onCancel, canCancel=true}) => {
     const {control, handleSubmit} = useForm<PointsFormData>();
     return (
         <Paper>
@@ -32,8 +33,9 @@ export const PointsForm: React.FC<PointsFormProps> = ({onSubmit, onCancel}) => {
                     <button
                         type="button"
                         onClick={onCancel}
-                        className="bg-red-500 hover:bg-red-700 text-white
-                         font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline m-2 flex-grow">
+                        className={`bg-red-500 hover:bg-red-700 text-white
+                            font-bold py-2 px-4 rounded focus:outline-none
+                            focus:shadow-outline m-2 flex-grow ${canCancel?'':'hidden'}`}>
                         ЗАКОНЧИТЬ!
                     </button>
                 </div>
