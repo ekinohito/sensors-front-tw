@@ -7,9 +7,14 @@ import React from "react";
 import {ToastContainer} from "react-toastify";
 import Head from "next/head";
 import {ProgressBar} from "../src/components/ProgressBar";
+import {Header} from "../src/components/Header";
+import useShow from "../src/hooks/useShow";
+import {ShowWrapper} from "../src/components/ShowWrapper";
+import {AdaptiveLayout} from "../src/components/AdaptiveLayout";
 
 const Home: NextPage = () => {
-    const {points, generatePoints, stopGeneration, progress, duration} = usePoints()
+    const {points, generatePoints, stopGeneration, progress, duration} = usePoints();
+    const [showMenu, toggle] = useShow();
     return (
         <>
             <Head>
@@ -19,23 +24,35 @@ const Home: NextPage = () => {
                 <link rel="manifest" href="/site.webmanifest"/>
                 <title>Sensors</title>
             </Head>
-            <header className="bg-blue-500">
-                <div className="container px-4 mx-auto sticky py-3 text-white text-2xl font-bold">
-                    Sensors
-                </div>
-            </header>
-            <div className="container px-4 mx-auto grid grid-cols-3 md:space-x-7 md:my-12 items-start">
-                <div className="col-span-3 md:col-span-2 text-center order-3 md:order-1">
+            <Header onToggle={toggle} show={showMenu}/>
+            <div className="container px-4 mx-auto grid grid-cols-3 md:space-x-7 md:my-12 items-start relative">
+                <AdaptiveLayout
+                    resetClassName="col-span-3 md:col-span-2 order-3 md:order-1"
+                    className="text-center col-span-full mt-7 md:mt-0"
+                    reset={showMenu}
+                >
                     <Paper>
                         <h1 className="text-xl font-bold text-gray-700">График</h1>
                         <PointsGraph points={points}/>
                     </Paper>
-                </div>
+                </AdaptiveLayout>
 
-                <div className="order-2 col-span-3 md:col-span-1 my-7 md:my-0">
-                    <PointsForm onCancel={stopGeneration} onSubmit={(values) => generatePoints(values)}/>
-                    {progress?<ProgressBar width={progress} duration={duration}/>:<></>}
-                </div>
+                <AdaptiveLayout
+                    className="my-7 md:my-0"
+                    resetClassName="order-2 col-span-3 md:col-span-1"
+                    reset={showMenu}
+                >
+                    {/*<ShowWrapper show={showMenu}>*/}
+                    {
+                        showMenu &&
+                        <>
+                            <PointsForm onCancel={stopGeneration} onSubmit={(values) => generatePoints(values)}/>
+                            {progress && <ProgressBar width={progress} duration={duration}/>}
+                        </>
+                    }
+                    {/*</ShowWrapper>*/}
+                </AdaptiveLayout>
+
             </div>
             <ToastContainer
                 position="bottom-right"
